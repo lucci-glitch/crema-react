@@ -3,11 +3,13 @@ const axios = require('axios');
 
 
 function Test() {
-
+  let data
   useEffect(() => {
-    axios.get('http://localhost:8080/hello')
+    axios.post('http://localhost:8080/api/quotes/scrape')
       .then(response => {
         // handle success
+        this.data = response.data;
+
         console.log(response.data);
       })
       .catch(error => {
@@ -16,7 +18,9 @@ function Test() {
       })
   }, [])
 
-  return null;
+  return (<div>
+
+  </div>);
 }
 
 export default Test;

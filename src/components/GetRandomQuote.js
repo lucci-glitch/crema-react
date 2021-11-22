@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 const axios = require('axios');
 
 const client = axios.create({
-    baseURL: "http://localhost:8080/api"
+    baseURL: "http://localhost:8080/crema-spring-0.0.1-SNAPSHOT/api"
 });
 
 export default function GetRandomQuote() {

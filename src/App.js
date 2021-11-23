@@ -1,21 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
-import GetTest from "./components/GetTest";
 import GetRandomQuote from "./components/GetRandomQuote";
+import NavBar from "./components/NavBar"
+import ChatRoom from "./views/ChatRoom"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-
-      </header>
-
-       <GetRandomQuote></GetRandomQuote>
-
-
-
-
-      
+      <NavBar></NavBar>
+      <ChatRoom></ChatRoom>
+      <GetRandomQuote></GetRandomQuote>
     </div>
   );
 }

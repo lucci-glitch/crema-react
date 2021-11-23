@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
 }
 
 .App-logo {
@@ -13,19 +12,82 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
+.Nav-bar {
+  background-color: #FBF46D;
+  display: flex;
+  font-size: 1.5rem;
+  color: #998CEB;
+  padding: 0.4rem;
+}
 
+.Chat-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 85vh;
+  background-color: #77E4D4;
+}
+
+.Chat-window {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 60%;
+  height: 75%;
+  padding: 1em;
+  overflow: scroll;
+}
+
+.Action-bar {
+  background-color: #B4FE98;
+  width: 60%;
+  height: 25%;
+  padding: 1em;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+input[id='Client-input']
+{
+    height: 50%;
+    width: 80%;
+    padding-left: 10px;
+    text-decoration: none;
+    margin: 1em;
+}
+
+button {
+  background-color: #8d7fee; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 1em;
+}
+
+button:hover {
+  background-color: #8576e9; 
+}
+
+.Message {
+  display: inline-block;
+  border: 1px solid #998CEB;
+  border-radius: 1rem;
+  width: 50%;
+}
+
+.Message p {
+  padding: 0.3rem;
+}
+
+.Message:nth-child(odd) {
+  background-color: #998CEB;
+  align-self: flex-end;
 }
 
 @keyframes App-logo-spin {

@@ -1,30 +1,21 @@
-.App {
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .Nav-bar {
   background-color: #FBF46D;
   display: flex;
   font-size: 1.5rem;
   color: #998CEB;
   padding: 0.4rem;
+  height: 10vh;
+}
+
+.Chat-room {
+  height: 90vh;
 }
 
 .Chat-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 85vh;
+  height: 100%;
   background-color: #77E4D4;
 }
 
@@ -39,7 +30,9 @@
 }
 
 .Action-bar {
+  display: flex;
   background-color: #B4FE98;
+  align-items: center;
   width: 60%;
   height: 25%;
   padding: 1em;
@@ -51,8 +44,8 @@
 
 input[id='Client-input']
 {
-    height: 50%;
-    width: 80%;
+    height: 6rem;
+    flex: 4 2 0;
     padding-left: 10px;
     text-decoration: none;
     margin: 1em;
@@ -62,7 +55,8 @@ button {
   background-color: #8d7fee; 
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 1rem 2rem;
+  height: 3rem;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -75,17 +69,19 @@ button:hover {
 }
 
 .Message {
-  display: inline-block;
   border: 1px solid #998CEB;
   border-radius: 1rem;
-  width: 50%;
+  box-shadow: 0 0.2rem 0.25rem rgba(0, 0, 0, 0.2);
+  max-width: 50%;
+  width: max-content;
 }
 
 .Message p {
   padding: 0.3rem;
+  margin: 0.5rem;
 }
 
-.Message:nth-child(odd) {
+.Message:nth-child(even) {
   background-color: #998CEB;
   align-self: flex-end;
 }

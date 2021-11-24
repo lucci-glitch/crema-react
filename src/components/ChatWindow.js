@@ -15,9 +15,7 @@ const ChatWindow = () => {
     const [messages, setMessages] = React.useState(["Hej! Vad har du för symptom?"]);
 
     const sendMessageToChat = (message) => {
-        console.log("send to chat: " + message);
-        messages.push(message);
-        //Hitta ett sätt att använda setMessages istället för push
+        setMessages((messages) => [...messages, message]);
     };
 
     return (

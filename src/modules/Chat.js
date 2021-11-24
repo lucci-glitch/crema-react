@@ -6,7 +6,6 @@ const Chat = () => {
   return (
     <div className='Chat-container'>
         <ChatWindow></ChatWindow>
-        <ActionBar></ActionBar>
     </div>
   );
 };

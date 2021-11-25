@@ -1,7 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import Message from "./Message";
 import ActionBar from "./ActionBar";
-import baseUrl from '../apienv';
+
+const axios = require('axios');
+
+const client = axios.create({
+    baseURL: "http://localhost:8080/crema-spring-0.0.1-SNAPSHOT/api"
+});
 
 const ChatWindow = () => {
     const [messages, setMessages] = React.useState(["Hej! Vad har du för symptom?"]);
@@ -17,8 +22,12 @@ const ChatWindow = () => {
       }, [messages]);
 
     const replyToMessage = () => {
-        const replay = "...";
-        setMessages((messages) => [...messages, replay])
+        async function getPost() {
+            const response = await client.get("/quotes/find",{ params: { text: "ja" } });
+            const reply = JSON.stringify(response.data.text).replace(/\"/g, "")
+            setMessages((messages) => [...messages, reply])
+        }
+        getPost()
     }
 
     const sendMessageToChat = (message) => {

@@ -1,21 +1,19 @@
 import React from "react";
 import Message from "./Message";
 import ActionBar from "./ActionBar";
-
-let items = [
-    "Jelly chocolate cake gummi bears apple pie jelly beans candy. Tootsie roll lollipop wafer topping toffee. Icing bonbon chocolate bar jelly beans soufflé topping croissant carrot cake.",
-    "Jelly chocolate cake gummi bears apple pie jelly beans candy. Tootsie roll lollipop wafer topping toffee.",
-    "Jelly chocolate cake gummi bears apple pie jelly beans candy.",
-    "Croissant cheesecake chocolate bar chocolate bonbon gingerbread.",
-    "Soufflé jelly beans toffee donut halvah fruitcake dessert cupcake.",
-    "Hodor. Hodor hodor, hodor...",
-];
+import baseUrl from '../apienv';
 
 const ChatWindow = () => {
     const [messages, setMessages] = React.useState(["Hej! Vad har du för symptom?"]);
 
+    const replyToMessage = () => {
+        const replay = "...";
+        setMessages((messages) => [...messages, replay])
+    }
+
     const sendMessageToChat = (message) => {
         setMessages((messages) => [...messages, message]);
+        replyToMessage()
     };
 
     return (

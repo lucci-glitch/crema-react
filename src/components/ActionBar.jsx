@@ -10,17 +10,13 @@ const ActionBar = ({ sendMessageToChat }) => {
     }
 
     const handleSubmit = () => {
-        sendMessageToChat(message.value)
-        setMessage({value: CLEAN_SLATE})
-    }
+        sendMessageToChat(message.value);
+        setMessage({ value: CLEAN_SLATE });
+    };
 
     return (
         <div className="Action-bar">
-            <input 
-            value={message.value}
-            type="text" 
-            id="Client-input" 
-            onChange={handleChange} />
+            <input value={message.value} type="text" id="Client-input" onChange={handleChange} />
             <button
                 type="submit"
                 onClick={() => {

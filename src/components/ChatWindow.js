@@ -2,37 +2,41 @@ import React, { useEffect, useRef } from "react";
 import Message from "./Message";
 import ActionBar from "./ActionBar";
 
-const axios = require('axios');
+const axios = require("axios");
 
 const client = axios.create({
-    baseURL: "http://localhost:8080/crema-spring-0.0.1-SNAPSHOT/api"
+    baseURL: "http://localhost:8080/crema-spring-0.0.1-SNAPSHOT/api",
 });
 
 const ChatWindow = () => {
     const [messages, setMessages] = React.useState(["Hej! Vad har du för symptom?"]);
 
-    const messagesEndRef = useRef(null)
+    const messagesEndRef = useRef(null);
 
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-      }
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
 
-      useEffect(() => {
-        scrollToBottom()
-      }, [messages]);
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
-    const replyToMessage = () => {
+    const replyToMessage = (message) => {
         async function getPost() {
-            const response = await client.get("/quotes/find",{ params: { text: "ja" } });
-            const reply = JSON.stringify(response.data.text).replace(/\"/g, "")
-            setMessages((messages) => [...messages, reply])
+            const response = await client.get("/quotes/find", { params: { text: message } });
+            const reply = JSON.stringify(response.data.text).replace(/"/g, "");
+            const timer = setTimeout(() => {
+                setMessages((messages) => [...messages, reply]);
+            }, 1000);
+            return () => clearTimeout(timer);
+            
         }
-        getPost()
-    }
+        getPost();
+    };
 
     const sendMessageToChat = (message) => {
         setMessages((messages) => [...messages, message]);
-        replyToMessage()
+        replyToMessage(message);
     };
 
     return (

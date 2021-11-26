@@ -12,6 +12,7 @@ const client = axios.create({
 
 function App() {
 
+  /*
   useEffect(() => {
     async function scrape() {
         const response = await client.post("/quotes/scrape");
@@ -19,7 +20,8 @@ function App() {
     }
     scrape();
 }, [])
-  
+  */
+ 
   return (
     <div className="App">
       <NavBar></NavBar>

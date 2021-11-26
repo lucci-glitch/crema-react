@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import "./App.css";
-import GetRandomQuote from "./components/GetRandomQuote";
 import NavBar from "./components/NavBar";
 import ChatRoom from "./views/ChatRoom";
 
@@ -25,7 +24,6 @@ function App() {
         <div className="App">
             <NavBar></NavBar>
             <ChatRoom></ChatRoom>
-            <GetRandomQuote></GetRandomQuote>
         </div>
     );
 }

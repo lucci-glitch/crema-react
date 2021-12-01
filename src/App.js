@@ -12,7 +12,7 @@ const client = axios.create({
 function App() {
     useEffect(() => {
         async function scrape() {
-            // const responseTitle = await client.post("/quotes/scrape/title");
+            // const responseTitle = await client.post("/forumthreads/scrape");
             // console.log(responseTitle);
             // const response = await client.post("/quotes/scrape");
             // console.log(response.data);

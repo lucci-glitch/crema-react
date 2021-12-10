@@ -1,6 +1,8 @@
 import { useEffect } from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar";
+import Admin from "./views/Admin";
 import ChatRoom from "./views/ChatRoom";
 
 const axios = require("axios");
@@ -21,9 +23,12 @@ function App() {
     }, []);
 
     return (
-        <div className="App">
+        <div className="app">
             <NavBar></NavBar>
-            <ChatRoom></ChatRoom>
+            <Routes>
+                <Route path="/" element={<ChatRoom />} />
+                <Route path="/admin" element={<Admin />} />
+            </Routes>
         </div>
     );
 }

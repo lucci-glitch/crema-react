@@ -23,7 +23,7 @@ const ChatWindow = () => {
 
     const replyToMessage = (message) => {
         async function getPost() {
-            const response = await client.get("/quotes/find", { params: { text: message } });
+            const response = await client.get("/quotes/find", { params: { inputMessage: message } });
             const reply = JSON.stringify(response.data.text).replace(/"/g, "");
             const timer = setTimeout(() => {
                 setMessages((messages) => [...messages, reply]);
@@ -41,7 +41,7 @@ const ChatWindow = () => {
 
     return (
         <>
-            <div className="Chat-window">
+            <div className="chat-window">
                 <h1>Chat window</h1>
                 {messages.map((message, index) => {
                     return <Message key={index} text={message}></Message>;

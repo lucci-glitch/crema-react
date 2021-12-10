@@ -15,7 +15,7 @@ const ActionBar = ({ sendMessageToChat }) => {
     };
 
     return (
-        <div className="Action-bar">
+        <div className="action-bar">
             <input value={message.value} type="text" id="Client-input" onChange={handleChange} />
             <button
                 type="submit"

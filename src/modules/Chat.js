@@ -4,7 +4,7 @@ import ActionBar from '../components/ActionBar';
   
 const Chat = () => {
   return (
-    <div className='Chat-container'>
+    <div className='chat-container'>
         <ChatWindow></ChatWindow>
     </div>
   );

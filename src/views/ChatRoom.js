@@ -3,7 +3,7 @@ import Chat from '../modules/Chat'
   
 const ChatRoom = () => {
   return (
-    <main className="Chat-room">
+    <main className="chat-room">
         <Chat></Chat>
     </main>
   );

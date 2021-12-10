@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from "react";
+import Loading from "../components/Loading";
 
 const axios = require("axios");
 
@@ -7,26 +8,32 @@ const client = axios.create({
 });
 
 const Admin = () => {
-    
-    async function handleClick () {
-        console.log("Clicked button")
+    const [loading, setLoading] = useState(false);
+
+    async function handleClick() {
+        console.log("Clicked button");
         scrape();
-    };
+    }
 
     async function scrape() {
-        console.log("Scrape threads")
+        setLoading(true);
+
+        console.log("Scrape threads");
         const responseTitle = await client.post("/forumthreads/scrape");
         console.log(responseTitle);
-        console.log("Scrape assemble")
+        console.log("Scrape assemble");
         const response = await client.post("/assemble");
         console.log(response.data);
-        console.log("Done")
+        console.log("Done");
+
+        setLoading(false);
     }
 
     return (
         <main className="admin">
+            {loading && <Loading />}
             <h1>Admin Page</h1>
-            <div className='container'>
+            <div className="container">
                 <button
                     type="button"
                     onClick={() => {

@@ -13,6 +13,7 @@ const Admin = () => {
     async function handleClick() {
         console.log("Clicked button");
         scrape();
+        // mockScrape();
     }
 
     async function scrape() {
@@ -28,6 +29,19 @@ const Admin = () => {
 
         setLoading(false);
     }
+    // function sleep(ms) {
+    //     return new Promise((resolve) => setTimeout(resolve, ms));
+    // }
+
+    // async function mockScrape() {
+    //     setLoading(true);
+    //     console.log("mock scrape");
+
+    //     await sleep(5000);
+
+    //     console.log("mock scrape complete");
+    //     setLoading(false);
+    // }
 
     return (
         <main className="admin">

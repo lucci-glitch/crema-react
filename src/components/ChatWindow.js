@@ -9,9 +9,10 @@ const client = axios.create({
 });
 
 const engine = new ChatBotEngine();
+const initState = engine.initialize();
 
 const ChatWindow = () => {
-    const [messages, setMessages] = React.useState(["Hej! Vad har du för symptom?"]);
+    const [messages, setMessages] = React.useState([initState]);
 
     const messagesEndRef = useRef(null);
 
@@ -41,6 +42,7 @@ const ChatWindow = () => {
         setMessages((messages) => [...messages, message]);
         const category = engine.getMessageCategory();
         replyToMessage(category, message);
+        console.log("category in ChatWindow: " + category);
     };
 
     return (

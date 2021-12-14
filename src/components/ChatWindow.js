@@ -10,6 +10,7 @@ const client = axios.create({
 
 const ChatWindow = () => {
     const [messages, setMessages] = React.useState(["Hej! Vad har du för symptom?"]);
+    const [chatState, setChatState] = React.useState("greeting");
 
     const messagesEndRef = useRef(null);
 
@@ -21,22 +22,39 @@ const ChatWindow = () => {
         scrollToBottom();
     }, [messages]);
 
-    const replyToMessage = (message) => {
+    // Ta in category beroende på chatbot state
+    const replyToMessage = (category, message) => {
         async function getPost() {
-            const response = await client.get("/quotes/find", { params: { inputMessage: message } });
+            const response = await client.get(`/quotes/${category}/find`, {
+                params: { inputMessage: message },
+            });
             const reply = JSON.stringify(response.data.text).replace(/"/g, "");
             const timer = setTimeout(() => {
                 setMessages((messages) => [...messages, reply]);
             }, 1000);
             return () => clearTimeout(timer);
-            
         }
         getPost();
     };
 
     const sendMessageToChat = (message) => {
+        //Lägger till användarens meddelande i chatten
         setMessages((messages) => [...messages, message]);
-        replyToMessage(message);
+
+        //Kolla chatbot state
+        let category = "";
+        switch (chatState) {
+            case "greeting":
+                category = "question";
+                setChatState("question");
+                break;
+            default:
+                setChatState("statement");
+                category = "statement";
+                break;
+        }
+        // Hämtar ett svar från backend
+        replyToMessage(category, message);
     };
 
     return (

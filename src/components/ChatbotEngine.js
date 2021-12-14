@@ -1,19 +1,17 @@
-// import React from "react";
+export default class ChatBotEngine {
+    constructor() {
+        this.chatState = "question";
+    }
 
-// const ChatBotEngine = () => {
+    getMessageCategory() {
+        let category = "";
 
-//     const [state, set] = React.useState("greeting");
-
-//     await userinput = Actionbar.message
-//     replyToMessage(userInput)
-
-//     setState("question")
-
-//     await userinput = Actionbar.message
-//     replyToMessage(userInput)
-
-//     setState("statement")
-
-//     await userinput = Actionbar.message
-//     replyToMessage(userInput)
-// };
+        if (this.chatState === "question") {
+            category = "question";
+            this.chatState = "statement";
+        } else {
+            category = "statement";
+        }
+        return category;
+    }
+}

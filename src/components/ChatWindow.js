@@ -1,16 +1,17 @@
 import React, { useEffect, useRef } from "react";
 import Message from "./Message";
 import ActionBar from "./ActionBar";
-
+import ChatBotEngine from "./ChatbotEngine";
 const axios = require("axios");
 
 const client = axios.create({
     baseURL: "http://localhost:8080/crema-spring-0.0.1-SNAPSHOT/api",
 });
 
+const engine = new ChatBotEngine();
+
 const ChatWindow = () => {
     const [messages, setMessages] = React.useState(["Hej! Vad har du för symptom?"]);
-    const [chatState, setChatState] = React.useState("greeting");
 
     const messagesEndRef = useRef(null);
 
@@ -22,7 +23,6 @@ const ChatWindow = () => {
         scrollToBottom();
     }, [messages]);
 
-    // Ta in category beroende på chatbot state
     const replyToMessage = (category, message) => {
         async function getPost() {
             const response = await client.get(`/quotes/${category}/find`, {
@@ -38,22 +38,8 @@ const ChatWindow = () => {
     };
 
     const sendMessageToChat = (message) => {
-        //Lägger till användarens meddelande i chatten
         setMessages((messages) => [...messages, message]);
-
-        //Kolla chatbot state
-        let category = "";
-        switch (chatState) {
-            case "greeting":
-                category = "question";
-                setChatState("question");
-                break;
-            default:
-                setChatState("statement");
-                category = "statement";
-                break;
-        }
-        // Hämtar ett svar från backend
+        const category = engine.getMessageCategory();
         replyToMessage(category, message);
     };
 

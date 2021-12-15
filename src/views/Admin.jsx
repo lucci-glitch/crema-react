@@ -9,43 +9,42 @@ const client = axios.create({
 
 const Admin = () => {
     const [loading, setLoading] = useState(false);
+    const [label, setLabel] = useState("");
 
     async function handleClick() {
         console.log("Clicked button");
         scrape();
-        // mockScrape();
+        //mockScrape();
     }
 
     async function scrape() {
         setLoading(true);
-
-        console.log("Scrape threads");
+        setLabel("Scrape threads...");
         const responseTitle = await client.post("/forumthreads/scrape");
         console.log(responseTitle);
-        console.log("Scrape assemble");
+        setLabel("Scrape posts...");
         const response = await client.post("/assemble");
         console.log(response.data);
         console.log("Done");
 
         setLoading(false);
     }
-    // function sleep(ms) {
-    //     return new Promise((resolve) => setTimeout(resolve, ms));
-    // }
+     function sleep(ms) {
+         return new Promise((resolve) => setTimeout(resolve, ms));
+     }
 
-    // async function mockScrape() {
-    //     setLoading(true);
-    //     console.log("mock scrape");
-
-    //     await sleep(5000);
-
-    //     console.log("mock scrape complete");
-    //     setLoading(false);
-    // }
+     async function mockScrape() {
+         setLoading(true);
+         setLabel("Scrape threads...");
+         await sleep(5000);
+         setLabel("Scrape posts...");
+         await sleep(5000);
+         setLoading(false);
+     }
 
     return (
         <main className="admin">
-            {loading && <Loading />}
+            {loading && <Loading label={label} />}
             <h1>Admin Page</h1>
             <div className="container">
                 <button

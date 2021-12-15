@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const Loading = (props) => {
     const [flip, set] = useState(false);
-    const aniprops = useSpring({
+    const springProps = useSpring({
         to: { opacity: 1 },
         from: { opacity: 0 },
         reset: true,
@@ -14,7 +14,7 @@ const Loading = (props) => {
         onRest: () => set(!flip),
     });
 
-    return <animated.h1 style={aniprops}>{props.label}</animated.h1>;
+    return <animated.h1 style={springProps}>{props.label}</animated.h1>;
 };
 
 export default Loading;

@@ -1,3 +1,5 @@
+import { MessageObject } from "../models/MessageObject";
+
 const GREETING = "greeting";
 const QUESTION = "question";
 const STATEMENT = "statement";
@@ -10,7 +12,7 @@ export default class ChatBotEngine {
 
     initialize() {
         this.setStates();
-        return "Hej! Vad har du för symptom?";
+        return new MessageObject("Hej! Vad har du för symptom?", "bot")
     }
 
     setStates() {

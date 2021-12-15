@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Message from "./Message";
 import ActionBar from "./ActionBar";
 import ChatBotEngine from "./ChatbotEngine";
+import { MessageObject } from "../models/MessageObject";
 const axios = require("axios");
 
 const client = axios.create({
@@ -12,7 +13,8 @@ const engine = new ChatBotEngine();
 const initState = engine.initialize();
 
 const ChatWindow = () => {
-    const [messages, setMessages] = React.useState([initState]);
+    const [messages, setMessages] = useState([initState]);
+    const [replying, setReplying] = useState(false);
 
     const messagesEndRef = useRef(null);
 
@@ -30,33 +32,44 @@ const ChatWindow = () => {
                 params: { inputMessage: message },
             });
             const reply = JSON.stringify(response.data.text).replace(/"/g, "");
-            const timer = setTimeout(() => {
-                setMessages((messages) => [...messages, reply]);
-            }, 1000);
-            return () => clearTimeout(timer);
+            setReplying(false)
+            const messageObject = new MessageObject(reply, "bot")
+            setMessages((messages) => [...messages, messageObject]);
         }
         getPost();
     };
 
-    const sendMessageToChat = (message) => {
+    async function sendMessageToChat (message) {
         setMessages((messages) => [...messages, message]);
         const category = engine.getMessageCategory();
+        setReplying(true);
+        await sleep(2000);
         replyToMessage(category, message);
-        console.log("category in ChatWindow: " + category);
     };
+
+    function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
 
     return (
         <>
             <div className="chat-window">
                 <h1>Chat window</h1>
-                {messages.map((message, index) => {
-                    return <Message key={index} text={message}></Message>;
-                })}
+                {Object.keys(messages).map((message, index) => (
+                    <Message key={index} text={messages[message].text} sender={messages[message].sender}></Message>
+                ))}
+                {replying && <Message text="..." sender="bot" animated="true" ></Message>}
                 <div ref={messagesEndRef} />
             </div>
             <ActionBar sendMessageToChat={sendMessageToChat}></ActionBar>
         </>
     );
 };
+
+/*
+{messages.map((message, index) => {
+                    return <Message key={index} text={message} sender="bot"></Message>;
+                })}
+*/
 
 export default ChatWindow;

@@ -66,10 +66,4 @@ const ChatWindow = () => {
     );
 };
 
-/*
-{messages.map((message, index) => {
-                    return <Message key={index} text={message} sender="bot"></Message>;
-                })}
-*/
-
 export default ChatWindow;

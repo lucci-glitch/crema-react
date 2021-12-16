@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Loading from "../components/Loading";
+import Loading from "../components/animations/Loading";
 
 const axios = require("axios");
 
@@ -19,28 +19,28 @@ const Admin = () => {
 
     async function scrape() {
         setLoading(true);
-        setLabel("Scrape threads...");
+        setLabel("Scraping threads...");
         const responseTitle = await client.post("/forumthreads/scrape");
         console.log(responseTitle);
-        setLabel("Scrape posts...");
+        setLabel("Scraping posts...");
         const response = await client.post("/assemble");
         console.log(response.data);
         console.log("Done");
 
         setLoading(false);
     }
-     function sleep(ms) {
-         return new Promise((resolve) => setTimeout(resolve, ms));
-     }
+     // function sleep(ms) {
+     //    return new Promise((resolve) => setTimeout(resolve, ms));
+     // }
 
-     async function mockScrape() {
-         setLoading(true);
-         setLabel("Scrape threads...");
-         await sleep(5000);
-         setLabel("Scrape posts...");
-         await sleep(5000);
-         setLoading(false);
-     }
+     // async function mockScrape() {
+     //    setLoading(true);
+     //    setLabel("Scraping threads...");
+     //    await sleep(5000);
+     //    setLabel("Scraping posts...");
+     //    await sleep(5000);
+     //    setLoading(false);
+     // }
 
     return (
         <main className="admin">

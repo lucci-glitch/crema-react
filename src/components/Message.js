@@ -1,11 +1,12 @@
 import React from 'react';
-  
-const Message = (props) => {
-  return (
-    <div className='message'>
-       <p>{props.text}</p> 
-    </div>
-  );
-};
-  
+import Bounce from './animations/Bounce';
+
+class Message extends React.Component {
+  render() {
+    return <div className={`message ${this.props.sender}`}>
+      {this.props.animated ? <Bounce></Bounce> : <p>{this.props.text}</p>}
+    </div>;
+  }
+}
+
 export default Message;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import authHeader from "./auth-header";
+// import authHeader from "./auth-header";
 
 //refactor -> ersätt API_URL med axios.defaults.baseURL
 const API_URL = "http://localhost:8080/crema-spring-0.0.1-SNAPSHOT/api/auth/";

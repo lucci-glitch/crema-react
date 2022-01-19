@@ -54,7 +54,7 @@ const ChatWindow = () => {
     return (
         <>
             <div className="chat-window">
-                <h1>Chat window</h1>
+                <h1></h1>
                 {Object.keys(messages).map((message, index) => (
                     <Message key={index} text={messages[message].text} sender={messages[message].sender}></Message>
                 ))}

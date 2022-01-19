@@ -1,15 +1,11 @@
 import { useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import Admin from "./views/Admin";
 import ChatRoom from "./views/ChatRoom";
-
-const axios = require("axios");
-
-const client = axios.create({
-    baseURL: "http://localhost:8080/crema-spring-0.0.1-SNAPSHOT/api",
-});
+import LoginPage from "./views/LoginPage";
+import RegisterPage from "./views/RegisterPage";
 
 function App() {
     useEffect(() => {
@@ -28,6 +24,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<ChatRoom />} />
                 <Route path="/admin" element={<Admin />} />
+                <Route exact path="/login" element={<LoginPage />} />
+                <Route exact path="/register" element={<RegisterPage />} />
             </Routes>
         </div>
     );

@@ -13,7 +13,14 @@ const NavBar = () => {
                 <div className="nav-bar-menu">
                     <Link className="nav-bar-item" to="/admin">Admin</Link>
                 </div>
+
+                <div className="nav-bar-menu">
+                    <Link className="nav-bar-item" to="/login">Log in</Link>
+                </div>
                 
+                <div className="nav-bar-menu">
+                    <Link className="nav-bar-item" to="/register">Sign up</Link>
+                </div>
             </nav>
         </header>
     );

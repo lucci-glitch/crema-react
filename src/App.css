@@ -1,28 +1,59 @@
 .nav-bar {
-  background-color: #FBF46D;
+  background-color: #2F3A8F;
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
-  padding: 0.4rem;
+  justify-content: center;
+  font-size: 2.5rem;
+  padding: 0.7rem;
   height: 10vh;
+  font-family: 'Kanit', sans-serif;
+}
+
+h4 {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
 }
 
 .nav-bar-item {
   flex-grow: 0;
   flex-shrink: 0;
-  color: #998CEB;
-  line-height: 1.5;
-  padding: 0.5rem 0.75rem;
+  color: #FEECE9;
+  line-height: 9;
+  padding: 0.6rem 1.25rem;
   position: relative;
+}
+
+#Client-input {
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.nav-bar-item:hover {
+  color: #FE7E6D;
 }
 
 a.nav-bar-item {
   text-decoration: none;
 }
 
-.chat-room,
+.chat-room {
+  height: 90vh;
+  background-color: #FEECE9;
+}
+
 .admin {
   height: 90vh;
+  background-color: #FEECE9;
+  display: flex;
+  justify-content: center;
+  padding-top:80px;
+}
+
+.form-page {
+  display: flex;
+  justify-content: center;
+  padding-top:100px;
+  
 }
 
 .container {
@@ -38,31 +69,46 @@ a.nav-bar-item {
   text-align: center;
 }
 
+.card-container {
+  text-align: center;
+  font-size: 16px;
+}
+
+.form-group {
+  padding-top: 20px;
+}
+
+.loading {
+  font-size: 16px;
+}
+
 .chat-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100%;
-  background-color: #77E4D4;
+  background-color: #CCD1E4;
 }
 
 .chat-window {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: #FEECE9;
   width: 60%;
   height: 75%;
   padding: 1em;
   overflow: scroll;
+  border-radius: 25px 25px 0 0;
 }
 
 .action-bar {
   display: flex;
-  background-color: #B4FE98;
+  background-color: #2F3A8F;
   align-items: center;
   width: 60%;
   height: 25%;
   padding: 1em;
+  border-radius: 0 0 25px 25px;
 }
 
 .app-link {
@@ -78,9 +124,9 @@ input[id='Client-input'] {
 }
 
 button {
-  background-color: #8d7fee;
+  background-color: #FE7E6D;
   border: none;
-  color: white;
+  color: #FEECE9;
   padding: 1rem 2rem;
   height: 3rem;
   text-align: center;
@@ -89,18 +135,21 @@ button {
   font-size: 16px;
   margin: 1em;
   max-width: 150px;
+  border-radius: 5px;
 }
 
 button:hover {
-  background-color: #8576e9;
+  background-color: #f8634f;
+  color: #FEECE9;
 }
 
 button:disabled {
-  background: #dddddd;
+  background: #CCD1E4;
+  color: #9aa9e4;
 }
 
 .message {
-  border: 1px solid #998CEB;
+  border: 1px solid #FE7E6D;
   border-radius: 1rem;
   box-shadow: 0 0.2rem 0.25rem rgba(0, 0, 0, 0.2);
   max-width: 50%;
@@ -114,7 +163,7 @@ button:disabled {
 }
 
 .message.bot {
-  background-color: #998CEB;
+  background-color: #FE7E6D;
   align-self: flex-end;
 }
 
@@ -162,4 +211,9 @@ button:disabled {
   30% {
     transform: translateY(-5px);
   }
+}
+
+.profile-img-card {
+  border: 1px solid #e0e3ee;
+  border-radius: 10px;
 }

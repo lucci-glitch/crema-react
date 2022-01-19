@@ -12,12 +12,12 @@ axios.defaults.headers.post["Access-Control-Allow-Methods"] = "*";
 axios.defaults.headers.post["Authorization"] = authHeader();*/
 
 const register = (username, password, passwordConfirm) => {
-    return axios.post(API_URL + "signup",null, {
-        params:{
+    return axios.post(API_URL + "signup", null, {
+        params: {
             username,
             password,
             passwordConfirm,
-        }
+        },
     });
 };
 
@@ -28,11 +28,11 @@ const login = (username, password) => {
             password,
         })
         .then((response) => {
-            if (response.data.accessToken) {
-                localStorage.setItem("user", JSON.stringify(response.data));
+            if (response.headers.authorization) {
+                localStorage.setItem("user", JSON.stringify(response.headers.authorization));
+                console.log(JSON.stringify(response.headers.authorization));
             }
-
-            return response.data;
+            return response.headers.authorization;
         });
 };
 

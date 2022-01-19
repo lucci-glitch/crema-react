@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import Admin from "./views/Admin";
@@ -9,6 +9,29 @@ import RegisterPage from "./views/RegisterPage";
 import { Link } from "react-router-dom";
 import React, { Component } from "react";
 
+    function PrivateRoute ({ chatRoom, ...rest }) {
+        return (
+            <Route {...rest} render={({ location }) => {
+                return localStorage.getItem("user") === true
+                    ? chatRoom
+                    : <Redirect to={{
+                        pathname: '/login',
+                        state: { from: location }
+                    }} />
+            }} />
+        )
+    }
+
+const authContext = createContext();
+
+function ProvideAuth({ children }) {
+    const auth = useProvideAuth();
+    return (
+        <authContext.Provider value={auth}>
+            {children}
+        </authContext.Provider>
+    );
+}
 class App extends Component {
     // useEffect(() => {
     //     async function scrape() {
@@ -19,6 +42,7 @@ class App extends Component {
     //     }
     //     scrape();
     // }, []);
+
 
     render() {
         return (
@@ -53,7 +77,9 @@ class App extends Component {
 
                 <div>
                     <Switch>
-                        <Route exact path="/" component={ChatRoom} />
+                        <PrivateRoute exact path="/">
+                         <ChatRoom />
+                         <PrivateRoute/>
                         <Route exact path="/admin" component={Admin} />
                         <Route exact path="/login" component={LoginPage} />
                         <Route exact path="/register" component={RegisterPage} />

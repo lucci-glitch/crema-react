@@ -101,15 +101,15 @@ const Register = (props) => {
         <div className="col-md-12">
             <div className="card card-container">
                 <img
-                    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                    src="profile_pic.jpeg"
                     alt="profile-img"
-                    className="profile-img-card"
+                    className="profile-img-card container"
                 />
 
                 <Form onSubmit={handleRegister} ref={form}>
                     {!successful && (
-                        <div>
-                            <div className="form-group">
+                        <div className="form-group">
+                            <div>
                                 <label htmlFor="username">Username</label>
                                 <Input
                                     type="text"
@@ -121,8 +121,8 @@ const Register = (props) => {
                                 />
                             </div>
 
-                            <div className="form-group">
-                                <label htmlFor="password">password</label>
+                            <div>
+                                <label htmlFor="password">Password</label>
                                 <Input
                                     type="text"
                                     className="form-control"
@@ -133,8 +133,8 @@ const Register = (props) => {
                                 />
                             </div>
 
-                            <div className="form-group">
-                                <label htmlFor="passwordConfirm">passwordConfirm</label>
+                            <div>
+                                <label htmlFor="passwordConfirm">Confirm password</label>
                                 <Input
                                     type="passwordConfirm"
                                     className="form-control"
@@ -145,7 +145,7 @@ const Register = (props) => {
                                 />
                             </div>
 
-                            <div className="form-group">
+                            <div>
                                 <button className="btn btn-primary btn-block">Sign Up</button>
                             </div>
                         </div>

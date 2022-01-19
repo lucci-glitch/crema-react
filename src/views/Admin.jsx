@@ -44,17 +44,17 @@ const Admin = () => {
 
     return (
         <main className="admin">
-            {loading && <Loading label={label} />}
-            <h1>Admin Page</h1>
+            {loading}
+            <h1></h1>
             <div className="container">
                 <button
                     type="button"
                     onClick={() => {
                         handleClick();
-                    }}
-                >
+                    }}>
                     Scrape
                 </button>
+                <Loading label={label} />
             </div>
         </main>
     );

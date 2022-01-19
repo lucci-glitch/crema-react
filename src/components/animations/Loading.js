@@ -10,11 +10,11 @@ const Loading = (props) => {
         reset: true,
         reverse: flip,
         delay: 200,
-        config: config.molasses,
+        config: config.slow,
         onRest: () => set(!flip),
     });
 
-    return <animated.h1 style={springProps}>{props.label}</animated.h1>;
+    return <animated.h4 style={springProps}>{props.label}</animated.h4>;
 };
 
 export default Loading;

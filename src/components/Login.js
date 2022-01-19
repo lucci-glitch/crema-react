@@ -75,56 +75,6 @@ class Login extends Component {
                 loading: false,
             });
         }
-<<<<<<< HEAD
-    };
-
-    return (
-        <div className="col-md-12">
-            <div className="card card-container">
-                <img
-                    src="profile_pic.jpeg"
-                    alt="profile-img"
-                    className="profile-img-card container"
-                />
-
-                <Form onSubmit={handleLogin} ref={form}>
-                    <div className="form-group">
-                        <label htmlFor="username">Username</label>
-                        <Input
-                            type="text"
-                            className="form-control"
-                            name="username"
-                            value={username}
-                            onChange={onChangeUsername}
-                            validations={[required]}
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <Input
-                            type="password"
-                            className="form-control"
-                            name="password"
-                            value={password}
-                            onChange={onChangePassword}
-                            validations={[required]}
-                        />
-                    </div>
-
-                    <div>
-                        <button className="btn btn-primary btn-block" disabled={loading}>
-                            {loading && <span className="spinner-border spinner-border-sm"></span>}
-                            <span>Login</span>
-                        </button>
-                    </div>
-
-                    {message && (
-                        <div>
-                            <div className="alert alert-danger" role="alert">
-                                {message}
-                            </div>
-=======
     }
 
     render() {
@@ -132,9 +82,9 @@ class Login extends Component {
             <div className="col-md-12">
                 <div className="card card-container">
                     <img
-                        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                        src="profile_pic.jpeg"
                         alt="profile-img"
-                        className="profile-img-card"
+                        className="profile-img-card container"
                     />
 
                     <Form
@@ -144,42 +94,42 @@ class Login extends Component {
                         }}
                     >
                         <div className="form-group">
-                            <label htmlFor="username">Username</label>
-                            <Input
-                                type="text"
-                                className="form-control"
-                                name="username"
-                                value={this.state.username}
-                                onChange={this.onChangeUsername}
-                                validations={[required]}
-                            />
-                        </div>
+                            <div>
+                                <label htmlFor="username">Username</label>
+                                <Input
+                                    type="text"
+                                    className="form-control"
+                                    name="username"
+                                    value={this.state.username}
+                                    onChange={this.onChangeUsername}
+                                    validations={[required]}
+                                />
+                            </div>
 
-                        <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <Input
-                                type="password"
-                                className="form-control"
-                                name="password"
-                                value={this.state.password}
-                                onChange={this.onChangePassword}
-                                validations={[required]}
-                            />
->>>>>>> main
-                        </div>
+                            <div>
+                                <label htmlFor="password">Password</label>
+                                <Input
+                                    type="password"
+                                    className="form-control"
+                                    name="password"
+                                    value={this.state.password}
+                                    onChange={this.onChangePassword}
+                                    validations={[required]}
+                                />
+                            </div>
 
-                        <div className="form-group">
-                            <button
-                                className="btn btn-primary btn-block"
-                                disabled={this.state.loading}
-                            >
-                                {this.state.loading && (
-                                    <span className="spinner-border spinner-border-sm"></span>
-                                )}
-                                <span>Login</span>
-                            </button>
+                            <div>
+                                <button
+                                    className="btn btn-primary btn-block"
+                                    disabled={this.state.loading}
+                                >
+                                    {this.state.loading && (
+                                        <span className="spinner-border spinner-border-sm"></span>
+                                    )}
+                                    <span>Login</span>
+                                </button>
+                            </div>
                         </div>
-
                         {this.state.message && (
                             <div className="form-group">
                                 <div className="alert alert-danger" role="alert">

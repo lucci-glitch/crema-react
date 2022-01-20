@@ -1,7 +1,5 @@
-import { useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
-import NavBar from "./components/NavBar";
 import Admin from "./views/Admin";
 import ChatRoom from "./views/ChatRoom";
 import LoginPage from "./views/LoginPage";
@@ -25,15 +23,6 @@ checkLogIn();
 console.log("App.js checkLogIn() isLoggedIn = " + isLoggedIn);
 
 class App extends Component {
-    // useEffect(() => {
-    //     async function scrape() {
-    //         // const responseTitle = await client.post("/forumthreads/scrape");
-    //         // console.log(responseTitle);
-    //         // const response = await client.post("/quotes/scrape");
-    //         // console.log(response.data);
-    //     }
-    //     scrape();
-    // }, []);
 
     render() {
         return (
@@ -69,9 +58,10 @@ class App extends Component {
                 <div>
                     <Switch>
                         <Route exact path="/">
-                            {isLoggedIn ? <ChatRoom /> : <Redirect to="/login" />}
+                            {isLoggedIn ? <Redirect to="/chat" /> : <Redirect to="/login" />}
                         </Route>
 
+                        <Route exact path="/chat" component={ChatRoom} />
                         <Route exact path="/admin" component={Admin} />
                         <Route exact path="/login" component={LoginPage} />
                         <Route exact path="/register" component={RegisterPage} />

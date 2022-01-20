@@ -56,6 +56,7 @@ class Login extends Component {
             AuthService.login(this.state.username, this.state.password).then(
                 () => {
                     this.props.history.push("/");
+                    console.log("Login.js history.push");
                     window.location.reload();
                 },
                 (error) => {

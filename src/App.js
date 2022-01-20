@@ -8,30 +8,22 @@ import LoginPage from "./views/LoginPage";
 import RegisterPage from "./views/RegisterPage";
 import { Link } from "react-router-dom";
 import React, { Component } from "react";
+import AuthService from "./services/auth.service";
 
-    function PrivateRoute ({ chatRoom, ...rest }) {
-        return (
-            <Route {...rest} render={({ location }) => {
-                return localStorage.getItem("user") === true
-                    ? chatRoom
-                    : <Redirect to={{
-                        pathname: '/login',
-                        state: { from: location }
-                    }} />
-            }} />
-        )
+let isLoggedIn;
+
+function checkLogIn() {
+    if (AuthService.getCurrentUser() != null) {
+        const user = AuthService.getCurrentUser();
+        console.log(user);
+        isLoggedIn = true;
+    } else {
+        isLoggedIn = false;
     }
-
-const authContext = createContext();
-
-function ProvideAuth({ children }) {
-    const auth = useProvideAuth();
-    return (
-        <authContext.Provider value={auth}>
-            {children}
-        </authContext.Provider>
-    );
 }
+checkLogIn();
+console.log("App.js checkLogIn() isLoggedIn = " + isLoggedIn);
+
 class App extends Component {
     // useEffect(() => {
     //     async function scrape() {
@@ -42,7 +34,6 @@ class App extends Component {
     //     }
     //     scrape();
     // }, []);
-
 
     render() {
         return (
@@ -77,9 +68,10 @@ class App extends Component {
 
                 <div>
                     <Switch>
-                        <PrivateRoute exact path="/">
-                         <ChatRoom />
-                         <PrivateRoute/>
+                        <Route exact path="/">
+                            {isLoggedIn ? <ChatRoom /> : <Redirect to="/login" />}
+                        </Route>
+
                         <Route exact path="/admin" component={Admin} />
                         <Route exact path="/login" component={LoginPage} />
                         <Route exact path="/register" component={RegisterPage} />

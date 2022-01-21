@@ -1,14 +1,14 @@
 import { MessageObject } from "../models/MessageObject";
 
 const GREETING = "greeting";
-const BODYPART = "bodypart"
+const BODYPART = "bodypart";
 const TREENODE = "treenode";
 
 export default class ChatBotEngine {
     constructor() {
         this.prevState = null;
         this.currentState = GREETING;
-        this.nextState = TREENODE;
+        this.nextState = BODYPART;
     }
 
     initialize() {

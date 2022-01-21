@@ -40,6 +40,7 @@ const ChatWindow = () => {
     // };
 
     const replyToMessage = (message) => {
+        engine.logStates()
 
         async function getBodyPartPost() {
             const response = await client.get(`/chat/first`, {
@@ -61,7 +62,7 @@ const ChatWindow = () => {
             setMessages((messages) => [...messages, messageObject])
         }
 
-        if (engine.currentState === "bodypart") {
+        if (engine.currentState == "bodypart") {
             getBodyPartPost()
         } else {
             getTreePost()
@@ -70,10 +71,10 @@ const ChatWindow = () => {
 
     async function sendMessageToChat (message) {
         setMessages((messages) => [...messages, message]);
-        // const category = engine.getMessageCategory();
         setReplying(true);
         await sleep(2000);
         replyToMessage(message);
+        engine.setStates()
     };
 
     function sleep(ms) {

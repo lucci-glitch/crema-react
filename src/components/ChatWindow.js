@@ -42,12 +42,12 @@ const ChatWindow = () => {
     const replyToMessage = (message) => {
         async function getPost() {
             const response = await client.get(`/chat`, {
-                params: { response: message }
+                params: { response: message.text }
             });
-            const reply = JSON.stringify(response.data)
+            const reply = JSON.stringify(response.data).replace(/"/g, "");
             setReplying(false)
-            const messageObject = new MessageObejct(reply, "bot")
-            setMessages((message) => [...messages, messageObject])
+            const messageObject = new MessageObject(reply, "bot")
+            setMessages((messages) => [...messages, messageObject])
         }
         getPost()
     }
@@ -67,7 +67,6 @@ const ChatWindow = () => {
     return (
         <>
             <div className="chat-window">
-                <h1></h1>
                 {Object.keys(messages).map((message, index) => (
                     <Message key={index} text={messages[message].text} sender={messages[message].sender}></Message>
                 ))}

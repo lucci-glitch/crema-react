@@ -26,25 +26,38 @@ const ChatWindow = () => {
         scrollToBottom();
     }, [messages]);
 
-    const replyToMessage = (category, message) => {
+    // const replyToMessage = (category, message) => {
+    //     async function getPost() {
+    //         const response = await client.get(`/quotes/${category}/find`, {
+    //             params: { inputMessage: message },
+    //         });
+    //         const reply = JSON.stringify(response.data.text).replace(/"/g, "");
+    //         setReplying(false)
+    //         const messageObject = new MessageObject(reply, "bot")
+    //         setMessages((messages) => [...messages, messageObject]);
+    //     }
+    //     getPost();
+    // };
+
+    const replyToMessage = (message) => {
         async function getPost() {
-            const response = await client.get(`/quotes/${category}/find`, {
-                params: { inputMessage: message },
+            const response = await client.get(`/chat`, {
+                params: { response: message }
             });
-            const reply = JSON.stringify(response.data.text).replace(/"/g, "");
+            const reply = JSON.stringify(response.data)
             setReplying(false)
-            const messageObject = new MessageObject(reply, "bot")
-            setMessages((messages) => [...messages, messageObject]);
+            const messageObject = new MessageObejct(reply, "bot")
+            setMessages((message) => [...messages, messageObject])
         }
-        getPost();
-    };
+        getPost()
+    }
 
     async function sendMessageToChat (message) {
         setMessages((messages) => [...messages, message]);
-        const category = engine.getMessageCategory();
+        // const category = engine.getMessageCategory();
         setReplying(true);
         await sleep(2000);
-        replyToMessage(category, message);
+        replyToMessage(message);
     };
 
     function sleep(ms) {

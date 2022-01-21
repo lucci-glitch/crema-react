@@ -1,18 +1,21 @@
 import { MessageObject } from "../models/MessageObject";
 
 const GREETING = "greeting";
-const QUESTION = "question";
-const STATEMENT = "statement";
+const BODYPART = "bodypart"
+const TREENODE = "treenode";
+// const STATEMENT = "statement";
+const END = "end";
+
 export default class ChatBotEngine {
     constructor() {
         this.prevState = null;
         this.currentState = GREETING;
-        this.nextState = QUESTION;
+        this.nextState = TREENODE;
     }
 
     initialize() {
         this.setStates();
-        return new MessageObject("Hej! Vad har du för symptom?", "bot")
+        return new MessageObject("Hej! Var har du ont?", "bot")
     }
 
     setStates() {
@@ -22,33 +25,35 @@ export default class ChatBotEngine {
     }
 
     setNextState() {
-        switch (this.curentState) {
-            case GREETING:
-                this.nextState = QUESTION;
-                break;
-            case QUESTION:
-                this.nextState = STATEMENT;
-                break;
-            default:
-                this.nextState = STATEMENT;
-        }
+        // switch (this.curentState) {
+        //     case GREETING:
+        //         this.nextState = TREENODE;
+        //         break;
+        //     default:
+        //         this.nextState = TREENODE;
+        // }
+
+        if (this.currentState == GREETING) {
+            this.nextState = TREENODE;
+        } 
     }
 
-    getMessageCategory() {
-        let category = "";
+    // getMessageCategory() {
+    //     let category = "";
 
-        console.log("chatState before if: ");
-        this.logStates();
+    //     console.log("chatState before if: ");
+    //     this.logStates();
 
-        if (this.currentState === QUESTION) {
-            category = QUESTION;
+    //     if (this.currentState === TREENODE) {
+    //         category = TREENODE;
 
-            this.setStates();
-        } else {
-            category = STATEMENT;
-        }
-        return category;
-    }
+    //         this.setStates();
+    //     } else {
+    //         category = STATEMENT;
+    //     }
+    //     return category;
+    // }
+
 
     logStates() {
         console.log("prev: " + this.prevState);

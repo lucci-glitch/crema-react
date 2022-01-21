@@ -40,7 +40,18 @@ const ChatWindow = () => {
     // };
 
     const replyToMessage = (message) => {
-        async function getPost() {
+
+        async function getBodyPartPost() {
+            const response = await client.get(`/chat/first`, {
+                params: { response: message.text }
+            });
+            const reply = JSON.stringify(response.data).replace(/"/g, "");
+            setReplying(false)
+            const messageObject = new MessageObject(reply, "bot")
+            setMessages((messages) => [...messages, messageObject])
+        }
+
+        async function getTreePost() {
             const response = await client.get(`/chat`, {
                 params: { response: message.text }
             });
@@ -49,7 +60,12 @@ const ChatWindow = () => {
             const messageObject = new MessageObject(reply, "bot")
             setMessages((messages) => [...messages, messageObject])
         }
-        getPost()
+
+        if (engine.currentState === "bodypart") {
+            getBodyPartPost()
+        } else {
+            getTreePost()
+        }
     }
 
     async function sendMessageToChat (message) {

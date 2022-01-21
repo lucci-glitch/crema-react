@@ -3,8 +3,6 @@ import { MessageObject } from "../models/MessageObject";
 const GREETING = "greeting";
 const BODYPART = "bodypart"
 const TREENODE = "treenode";
-// const STATEMENT = "statement";
-const END = "end";
 
 export default class ChatBotEngine {
     constructor() {
@@ -25,17 +23,17 @@ export default class ChatBotEngine {
     }
 
     setNextState() {
-        // switch (this.curentState) {
-        //     case GREETING:
-        //         this.nextState = TREENODE;
-        //         break;
-        //     default:
-        //         this.nextState = TREENODE;
-        // }
+        switch (this.currentState) {
+            case GREETING:
+                this.nextState = BODYPART;
+                break;
+            case BODYPART:
+                this.nextState = TREENODE;
+                break;    
+            default:
+                this.nextState = TREENODE;
+        }
 
-        if (this.currentState == GREETING) {
-            this.nextState = TREENODE;
-        } 
     }
 
     // getMessageCategory() {

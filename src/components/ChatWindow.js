@@ -26,25 +26,55 @@ const ChatWindow = () => {
         scrollToBottom();
     }, [messages]);
 
-    const replyToMessage = (category, message) => {
-        async function getPost() {
-            const response = await client.get(`/quotes/${category}/find`, {
-                params: { inputMessage: message },
+    // const replyToMessage = (category, message) => {
+    //     async function getPost() {
+    //         const response = await client.get(`/quotes/${category}/find`, {
+    //             params: { inputMessage: message },
+    //         });
+    //         const reply = JSON.stringify(response.data.text).replace(/"/g, "");
+    //         setReplying(false)
+    //         const messageObject = new MessageObject(reply, "bot")
+    //         setMessages((messages) => [...messages, messageObject]);
+    //     }
+    //     getPost();
+    // };
+
+    const replyToMessage = (message) => {
+        engine.logStates()
+
+        async function getBodyPartPost() {
+            const response = await client.get(`/chat/first`, {
+                params: { response: message.text }
             });
-            const reply = JSON.stringify(response.data.text).replace(/"/g, "");
+            const reply = JSON.stringify(response.data).replace(/"/g, "");
             setReplying(false)
             const messageObject = new MessageObject(reply, "bot")
-            setMessages((messages) => [...messages, messageObject]);
+            setMessages((messages) => [...messages, messageObject])
         }
-        getPost();
-    };
+
+        async function getTreePost() {
+            const response = await client.get(`/chat`, {
+                params: { response: message.text }
+            });
+            const reply = JSON.stringify(response.data).replace(/"/g, "");
+            setReplying(false)
+            const messageObject = new MessageObject(reply, "bot")
+            setMessages((messages) => [...messages, messageObject])
+        }
+
+        if (engine.currentState == "bodypart") {
+            getBodyPartPost()
+        } else {
+            getTreePost()
+        }
+    }
 
     async function sendMessageToChat (message) {
         setMessages((messages) => [...messages, message]);
-        const category = engine.getMessageCategory();
         setReplying(true);
         await sleep(2000);
-        replyToMessage(category, message);
+        replyToMessage(message);
+        engine.setStates()
     };
 
     function sleep(ms) {
@@ -54,7 +84,6 @@ const ChatWindow = () => {
     return (
         <>
             <div className="chat-window">
-                <h1></h1>
                 {Object.keys(messages).map((message, index) => (
                     <Message key={index} text={messages[message].text} sender={messages[message].sender}></Message>
                 ))}

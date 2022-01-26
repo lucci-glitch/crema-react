@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Message from "./Message";
 import ActionBar from "./ActionBar";
 import ChatBotEngine from "./ChatbotEngine";
-import { MessageObject } from "../models/MessageObject";
+import { MessageObject,FinalMessageObject } from "../models/*";
 const axios = require("axios");
 
 const client = axios.create({
@@ -46,20 +46,36 @@ const ChatWindow = () => {
             const response = await client.get(`/chat/first`, {
                 params: { response: message.text }
             });
-            const reply = JSON.stringify(response.data).replace(/"/g, "");
+            const reply = JSON.stringify(response.data).replace(/"[]/g, "");
             setReplying(false)
             const messageObject = new MessageObject(reply, "bot")
             setMessages((messages) => [...messages, messageObject])
+            console.log("messageObject")
+            console.log(messageObject)
+            console.log("-------------")
+            console.log("reply")
+            console.log(reply)
         }
 
         async function getTreePost() {
             const response = await client.get(`/chat`, {
                 params: { response: message.text }
             });
-            const reply = JSON.stringify(response.data).replace(/"/g, "");
+            console.log(response.data)
+            const reply = JSON.stringify(response.data).replace(/",[]/g, "");
             setReplying(false)
+            if(reply.length === 4){
+                const finalMessageObject = new FinalMessageObject(reply[0],reply[1],reply[2],reply[3],"bot")
+                setMessages((messages) => [...messages, finalMessageObject])
+            }else{
             const messageObject = new MessageObject(reply, "bot")
             setMessages((messages) => [...messages, messageObject])
+            console.log("messageObject")
+            console.log(messageObject)
+            console.log("-------------")
+            console.log("reply")
+            console.log(reply)
+            }
         }
 
         if (engine.currentState == "bodypart") {

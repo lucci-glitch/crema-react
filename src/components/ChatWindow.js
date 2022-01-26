@@ -104,6 +104,7 @@ const ChatWindow = () => {
                     <Message key={index} text={messages[message].text} sender={messages[message].sender}></Message>
                 ))}
                 {replying && <Message text="..." sender="bot" animated="true" ></Message>}
+                {replying && <FinalMessage post1="..." url1="..." post2="..." url2="..." sender="bot" animated="true" ></FinalMessage>}
                 <div ref={messagesEndRef} />
             </div>
             <ActionBar sendMessageToChat={sendMessageToChat}></ActionBar>

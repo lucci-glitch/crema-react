@@ -16,6 +16,12 @@ export default class ChatBotEngine {
         return new MessageObject("Hej! Var har du ont?", "bot")
     }
 
+    backToBody() {
+        this.prevState = GREETING;
+        this.currentState = BODYPART;
+        this.nextState = TREENODE;
+    }
+
     setStates() {
         this.prevState = this.currentState;
         this.currentState = this.nextState;

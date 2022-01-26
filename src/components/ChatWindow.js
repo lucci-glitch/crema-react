@@ -4,7 +4,6 @@ import ActionBar from "./ActionBar";
 import ChatBotEngine from "./ChatbotEngine";
 import { MessageObject } from "../models/MessageObject";
 import { FinalMessageObject } from "../models/FinalMessageObject";
-import FinalMessage2 from "./FinalMessage2";
 
 const axios = require("axios");
 
@@ -14,7 +13,6 @@ const client = axios.create({
 
 const engine = new ChatBotEngine();
 const initState = engine.initialize();
-var renderFinalMessage = false;
 
 const ChatWindow = () => {
     const [messages, setMessages] = useState([initState]);
@@ -30,19 +28,6 @@ const ChatWindow = () => {
         scrollToBottom();
     }, [messages]);
 
-    // const replyToMessage = (category, message) => {
-    //     async function getPost() {
-    //         const response = await client.get(`/quotes/${category}/find`, {
-    //             params: { inputMessage: message },
-    //         });
-    //         const reply = JSON.stringify(response.data.text).replace(/"/g, "");
-    //         setReplying(false)
-    //         const messageObject = new MessageObject(reply, "bot")
-    //         setMessages((messages) => [...messages, messageObject]);
-    //     }
-    //     getPost();
-    // };
-
     const replyToMessage = (message) => {
         engine.logStates()
 
@@ -50,36 +35,25 @@ const ChatWindow = () => {
             const response = await client.get(`/chat/first`, {
                 params: { response: message.text }
             });
-            const reply = JSON.stringify(response.data).replace(/"[]/g, "");
+            const reply = JSON.stringify(response.data).replace(/"/g, "");
             setReplying(false)
             const messageObject = new MessageObject(reply, "bot")
             setMessages((messages) => [...messages, messageObject])
-            console.log("messageObject")
-            console.log(messageObject)
-            console.log("-------------")
-            console.log("reply")
-            console.log(reply)
         }
 
         async function getTreePost() {
             const response = await client.get(`/chat`, {
                 params: { response: message.text }
             });
-            console.log(response.data)
-            const reply = JSON.stringify(response.data).replace(/",[]/g, "");
+            const reply = response.data
             setReplying(false)
-            if(reply.length === 4){
-                renderFinalMessage =true;
+            if(reply.length > 1){
                 const finalMessageObject = new FinalMessageObject(reply[0],reply[1],reply[2],reply[3],"bot")
                 setMessages((messages) => [...messages, finalMessageObject])
+                engine.backToBody()
             }else{
-            const messageObject = new MessageObject(reply, "bot")
+            const messageObject = new MessageObject(reply[0], "bot")
             setMessages((messages) => [...messages, messageObject])
-            console.log("messageObject")
-            console.log(messageObject)
-            console.log("-------------")
-            console.log("reply")
-            console.log(reply)
             }
         }
 
@@ -106,17 +80,16 @@ const ChatWindow = () => {
         <>
             <div className="chat-window">
                 {Object.keys(messages).map((message, index) => (
-                    <Message key={index} text={messages[message].text} sender={messages[message].sender}></Message>,
-                      /*  <FinalMessage2 key={index}
-                                       post1={messages[message].post1}
-                                       url1={messages[message].url1}
-                                       post2={messages[message].post2}
-                                       url2={messages[message].url2}
-                                       sender={messages[message].sender}></FinalMessage2>*/
+                    <Message 
+                    key={index} 
+                    text={messages[message].text} 
+                    url={messages[message].url}
+                    text2={messages[message].text2}
+                    url2={messages[message].url2}
+                    sender={messages[message].sender}></Message>
                 ))}
 
                 {replying && <Message text="..." sender="bot" animated="true" ></Message>}
-                {replying && renderFinalMessage && {/*&& <FinalMessage2 post1="..." url1="..." post2="..." url2="..." sender="bot" animated="true" ></FinalMessage2>*/}}
                 <div ref={messagesEndRef} />
             </div>
             <ActionBar sendMessageToChat={sendMessageToChat}></ActionBar>

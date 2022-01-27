@@ -12,6 +12,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
-//Testa att lägga Login komponenten rätt här, kan hända att exporten 
-// gör att props inte fungerar

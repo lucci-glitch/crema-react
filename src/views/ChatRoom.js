@@ -1,9 +1,7 @@
 import React from "react";
 import ChatWindow from "../components/ChatWindow";
-import AuthService from "../services/auth.service";
 
 const ChatRoom = () => {
-    const currentUser = AuthService.getCurrentUser();
 
     return (
         <main className="chat-room">

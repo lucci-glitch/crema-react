@@ -1,7 +1,5 @@
-import { useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Switch, Route } from "react-router-dom";
 import "./App.css";
-import NavBar from "./components/NavBar";
 import Admin from "./views/Admin";
 import ChatRoom from "./views/ChatRoom";
 import LoginPage from "./views/LoginPage";
@@ -10,15 +8,6 @@ import { Link } from "react-router-dom";
 import React, { Component } from "react";
 
 class App extends Component {
-    // useEffect(() => {
-    //     async function scrape() {
-    //         // const responseTitle = await client.post("/forumthreads/scrape");
-    //         // console.log(responseTitle);
-    //         // const response = await client.post("/quotes/scrape");
-    //         // console.log(response.data);
-    //     }
-    //     scrape();
-    // }, []);
 
     render() {
         return (

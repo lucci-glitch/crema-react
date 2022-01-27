@@ -17,9 +17,9 @@ export default class ChatBotEngine {
     }
 
     backToBody() {
-        this.prevState = GREETING;
-        this.currentState = BODYPART;
-        this.nextState = TREENODE;
+        this.prevState = null;
+        this.currentState = GREETING;
+        this.nextState = BODYPART;
     }
 
     setStates() {
@@ -41,23 +41,6 @@ export default class ChatBotEngine {
         }
 
     }
-
-    // getMessageCategory() {
-    //     let category = "";
-
-    //     console.log("chatState before if: ");
-    //     this.logStates();
-
-    //     if (this.currentState === TREENODE) {
-    //         category = TREENODE;
-
-    //         this.setStates();
-    //     } else {
-    //         category = STATEMENT;
-    //     }
-    //     return category;
-    // }
-
 
     logStates() {
         console.log("prev: " + this.prevState);

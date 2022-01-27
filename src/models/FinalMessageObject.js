@@ -1,5 +1,5 @@
 export class FinalMessageObject {
-    constructor(text, url,text2,url2,sender) {
+    constructor(text, url, text2, url2, sender) {
         this.text = text;
         this.url = url;
         this.text2 = text2;

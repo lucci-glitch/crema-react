@@ -29,7 +29,6 @@ const ChatWindow = () => {
     }, [messages]);
 
     const replyToMessage = (message) => {
-        engine.logStates()
 
         async function getBodyPartPost() {
             const response = await client.get(`/chat/first`, {
@@ -51,7 +50,7 @@ const ChatWindow = () => {
                 const finalMessageObject = new FinalMessageObject(reply[0],reply[1],reply[2],reply[3],"bot")
                 setMessages((messages) => [...messages, finalMessageObject])
                 engine.backToBody()
-            }else{
+            } else {
             const messageObject = new MessageObject(reply[0], "bot")
             setMessages((messages) => [...messages, messageObject])
             }
